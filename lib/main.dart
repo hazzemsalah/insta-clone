@@ -1,6 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:instaclone/firebase_options.dart';
+import 'package:instaclone/state/auth/backend/authenticator.dart';
+
+import 'dart:developer' as devtools show log;
+
+extension Log on Object {
+  void log() => devtools.log(toString());
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,8 +41,30 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextButton(
+            onPressed: () async {
+              final result = await Authenticator().loginWithGoogle();
+              result.log();
+            },
+            child: const Text(
+              "Sign In with Google",
+            ),
+          ),
+          TextButton(
+            onPressed: () async {
+              final result = await Authenticator().loginWithFacebook();
+              result.log();
+            },
+            child: const Text(
+              "Sign In with Facebook",
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

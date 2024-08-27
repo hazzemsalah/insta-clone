@@ -6,7 +6,7 @@ import 'package:instaclone/state/posts/typedefs/user_id.dart';
 
 @immutable
 class AuthState {
-  final AuthResults? result;
+  final AuthResult? result;
   final bool isLoading;
   final UserId? userId;
   const AuthState({
