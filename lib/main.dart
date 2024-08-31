@@ -1,20 +1,22 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:instaclone/firebase_options.dart';
-import 'package:instaclone/state/auth/backend/authenticator.dart';
-
-import 'dart:developer' as devtools show log;
-
-extension Log on Object {
-  void log() => devtools.log(toString());
-}
+import 'package:instaclone/pages/components/loading/loading_screen.dart';
+import 'package:instaclone/state/auth/models/auth_result.dart';
+import 'package:instaclone/state/auth/providers/auth_state_provider.dart';
+import 'package:instaclone/state/providers/is_loading_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -27,38 +29,86 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
         primarySwatch: Colors.blueGrey,
-        indicatorColor: const Color.fromARGB(255, 131, 208, 247),
+        indicatorColor: Colors.blueGrey,
       ),
       darkTheme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: Consumer(
+        builder: (context, ref, child) {
+          // take care of displaying the loading screen
+          ref.listen<bool>(
+            isLoadingProvider,
+            (_, isLoading) {
+              if (isLoading) {
+                LoadingScreen.instance().show(context: context);
+              } else {
+                LoadingScreen.instance().hide();
+              }
+            },
+          );
+
+          final isLoggedIn =
+              ref.watch(authStateProvider).result == AuthResult.success;
+          if (isLoggedIn) {
+            return const MainPage();
+          } else {
+            return const LoginPage();
+          }
+        },
+      ),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+// for when you already logged in
+class MainPage extends StatelessWidget {
+  const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Main Page'),
+      ),
+      body: Consumer(
+        builder: (context, ref, child) {
+          return TextButton(
+            onPressed: () async {
+              await ref.read(authStateProvider.notifier).logOut();
+            },
+            child: const Text(
+              "Logout",
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+// for when you are not logged in
+class LoginPage extends ConsumerWidget {
+  const LoginPage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Login Page'),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TextButton(
-            onPressed: () async {
-              final result = await Authenticator().loginWithGoogle();
-              result.log();
-            },
+            onPressed: ref.read(authStateProvider.notifier).lofInWithGoogle,
             child: const Text(
               "Sign In with Google",
             ),
           ),
           TextButton(
-            onPressed: () async {
-              final result = await Authenticator().loginWithFacebook();
-              result.log();
-            },
+            onPressed: ref.read(authStateProvider.notifier).lofInWithFacebook,
             child: const Text(
               "Sign In with Facebook",
             ),
