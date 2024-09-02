@@ -3,17 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:instaclone/firebase_options.dart';
 import 'package:instaclone/pages/components/loading/loading_screen.dart';
+import 'package:instaclone/pages/login/login_page.dart';
 import 'package:instaclone/state/auth/models/auth_result.dart';
 import 'package:instaclone/state/auth/providers/auth_state_provider.dart';
-<<<<<<< HEAD
 import 'package:instaclone/state/providers/is_loading_provider.dart';
-=======
-import 'dart:developer' as devtools show log;
-
-extension Log on Object {
-  void log() => devtools.log(toString());
-}
->>>>>>> a610f9412275b1244e826f4b38f15dd7be4b3acb
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -75,7 +68,6 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
       appBar: AppBar(
         title: const Text('Main Page'),
       ),
@@ -92,55 +84,6 @@ class MainPage extends StatelessWidget {
         },
       ),
     );
-=======
-        appBar: AppBar(
-          title: const Text('Main Page'),
-        ),
-        body: Consumer(
-          builder: (context, ref, child) {
-            return TextButton(
-              onPressed: () async {
-                await ref.read(authStateProvider.notifier).logOut();
-              },
-              child: const Text(
-                "Logout",
-              ),
-            );
-          },
-        ));
->>>>>>> a610f9412275b1244e826f4b38f15dd7be4b3acb
   }
 }
 
-// for when you are not logged in
-class LoginPage extends ConsumerWidget {
-  const LoginPage({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login Page'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextButton(
-            onPressed: ref.read(authStateProvider.notifier).lofInWithGoogle,
-            child: const Text(
-              "Sign In with Google",
-            ),
-          ),
-          TextButton(
-            onPressed: ref.read(authStateProvider.notifier).lofInWithFacebook,
-            child: const Text(
-              "Sign In with Facebook",
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}

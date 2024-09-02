@@ -25,7 +25,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     state = const AuthState.unknown();
   }
 
-  Future<void> lofInWithGoogle() async {
+  Future<void> logInWithGoogle() async {
     state = state.copiedWithIsLoading(true);
     final result = await _authenticator.loginWithGoogle();
     final userId = _authenticator.userId;
