@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:instaclone/firebase_options.dart';
 import 'package:instaclone/pages/components/loading/loading_screen.dart';
 import 'package:instaclone/pages/login/login_page.dart';
+import 'package:instaclone/pages/main/mainpage.dart';
 import 'package:instaclone/state/auth/models/auth_result.dart';
 import 'package:instaclone/state/auth/providers/auth_state_provider.dart';
 import 'package:instaclone/state/providers/is_loading_provider.dart';
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
           final isLoggedIn =
               ref.watch(authStateProvider).result == AuthResult.success;
           if (isLoggedIn) {
-            return const MainPage();
+            return const Mainpage();
           } else {
             return const LoginPage();
           }
@@ -61,28 +62,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// for when you already logged in
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Main Page'),
-      ),
-      body: Consumer(
-        builder: (context, ref, child) {
-          return TextButton(
-            onPressed: () async {
-              await ref.read(authStateProvider.notifier).logOut();
-            },
-            child: const Text(
-              "Logout",
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
