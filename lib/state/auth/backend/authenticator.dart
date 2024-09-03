@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:instaclone/state/constants/constants.dart';
+import 'package:instaclone/state/auth/constants/constants.dart';
 import 'package:instaclone/state/auth/models/auth_result.dart';
 import 'package:instaclone/state/posts/typedefs/user_id.dart';
 
