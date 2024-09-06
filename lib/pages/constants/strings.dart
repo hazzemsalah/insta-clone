@@ -18,7 +18,7 @@ class Strings {
   static const logIntoYourAccount =
       'Log into your account using one of the option below !';
   static const comments = 'Comments';
-  static const writeYourCommentHere = 'Write your comment ere ...';
+  static const writeYourCommentHere = 'Write your comment here ...';
   static const checkOutThisPost = 'Check out this post!';
   static const postDetails = 'Post Details';
   static const post = 'Post';

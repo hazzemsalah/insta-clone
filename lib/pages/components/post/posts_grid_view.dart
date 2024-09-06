@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instaclone/pages/components/post/post_thumnail_view.dart';
+import 'package:instaclone/pages/post_comments/post_comments_page.dart';
 import 'package:instaclone/state/posts/models/post.dart';
 
 class PostsGridView extends StatelessWidget {
