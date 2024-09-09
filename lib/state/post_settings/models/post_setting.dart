@@ -4,7 +4,7 @@ enum PostSetting {
   allowLikes(
     title: Constants.allowLikesTilte,
     descreption: Constants.allowLikesDescription,
-    storageKey: Constants.allowCommentsStorageKey,
+    storageKey: Constants.allowLikeStorageKey,
   ),
 
   allowComments(

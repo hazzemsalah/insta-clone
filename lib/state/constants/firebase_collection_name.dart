@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 
 @immutable
 class FirebaseCollectionName {
-  static const thumnails = "thumnails";
+  static const thumbnails = "thumnails";
   static const comments = "comments";
   static const likes = "likes";
   static const posts = "posts";

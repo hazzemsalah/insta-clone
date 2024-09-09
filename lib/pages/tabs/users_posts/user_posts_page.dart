@@ -9,7 +9,7 @@ import 'package:instaclone/state/posts/providers/user_posts_provider.dart';
 
 
 class UserPostsView extends ConsumerWidget {
-  const UserPostsView({Key? key}) : super(key: key);
+  const UserPostsView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

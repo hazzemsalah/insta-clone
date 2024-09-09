@@ -78,7 +78,7 @@ class ImageUploadNotifier extends StateNotifier<IsLoading> {
     final thumbnailRef = FirebaseStorage.instance
         .ref()
         .child(userId)
-        .child(FirebaseCollectionName.thumnails)
+        .child(FirebaseCollectionName.thumbnails)
         .child(fileName);
 
     final originalFileRef = FirebaseStorage.instance

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instaclone/pages/components/post/post_thumnail_view.dart';
-import 'package:instaclone/pages/post_comments/post_comments_page.dart';
+import 'package:instaclone/pages/post_details/post_details_page.dart';
 import 'package:instaclone/state/posts/models/post.dart';
 
 class PostsGridView extends StatelessWidget {
@@ -26,6 +26,12 @@ class PostsGridView extends StatelessWidget {
           post: post,
           onTapped: () {
             //Navigato to the post details page
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PostDetailsPage(post: post),
+              ),
+            );
           },
         );
       },
