@@ -5,6 +5,7 @@ import 'package:instaclone/pages/components/dialogs/alert_dialog_model.dart';
 import 'package:instaclone/pages/components/dialogs/logout_dialog.dart';
 import 'package:instaclone/pages/constants/strings.dart';
 import 'package:instaclone/pages/create_new_post/create_new_post_page.dart';
+import 'package:instaclone/pages/tabs/search/search_page.dart';
 import 'package:instaclone/pages/tabs/users_posts/user_posts_page.dart';
 import 'package:instaclone/state/auth/providers/auth_state_provider.dart';
 import 'package:instaclone/state/image_upload/helpers/image_picker_helper.dart';
@@ -81,10 +82,11 @@ class _MainPageState extends ConsumerState<Mainpage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (_) => CreateNewPostPage(
-                            fileToPost: imageFile,
-                            fileType: FileType.image,
-                          )),
+                    builder: (_) => CreateNewPostPage(
+                      fileToPost: imageFile,
+                      fileType: FileType.image,
+                    ),
+                  ),
                 );
               },
             ),
@@ -123,7 +125,7 @@ class _MainPageState extends ConsumerState<Mainpage> {
         body: const TabBarView(
           children: [
             UserPostsView(),
-            UserPostsView(),
+            SearchPage(),
             UserPostsView(),
           ],
         ),
@@ -131,3 +133,4 @@ class _MainPageState extends ConsumerState<Mainpage> {
     );
   }
 }
+

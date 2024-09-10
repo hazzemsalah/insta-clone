@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:instaclone/state/posts/models/post.dart';
 
-class PostThumnailview extends StatelessWidget {
+class PostThumbnailview extends StatelessWidget {
   final Post post;
   final VoidCallback onTapped;
-  const PostThumnailview({
+  const PostThumbnailview({
     super.key,
     required this.post,
     required this.onTapped,
