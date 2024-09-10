@@ -5,29 +5,26 @@ import 'package:instaclone/pages/components/animations/error_animation_page.dart
 import 'package:instaclone/pages/components/animations/loading_animation_page.dart';
 import 'package:instaclone/pages/components/post/posts_grid_view.dart';
 import 'package:instaclone/pages/constants/strings.dart';
-import 'package:instaclone/state/posts/providers/user_posts_provider.dart';
+import 'package:instaclone/state/posts/providers/all_posts_provider.dart';
 
-
-class UserPostsPage extends ConsumerWidget {
-  const UserPostsPage({super.key});
+class HomePage extends ConsumerWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final posts = ref.watch(userPostsProvider);
+    final posts = ref.watch(allPostsProvider);
     return RefreshIndicator(
       onRefresh: () {
-        ref.refresh(userPostsProvider);
+        ref.refresh(allPostsProvider);
         return Future.delayed(
-          const Duration(
-            seconds: 1,
-          ),
+          const Duration(seconds: 1),
         );
       },
       child: posts.when(
         data: (posts) {
           if (posts.isEmpty) {
             return const EmptyContentsWithTextAnimationPage(
-              text: Strings.youHaveNoPosts,
+              text: Strings.noPostAvailable,
             );
           } else {
             return PostsGridView(
